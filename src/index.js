@@ -3,11 +3,18 @@
  */
 
 import Data from './data'
+import Dom from './Dom'
 
 // The version of hake-form
 
 class HakeForm {
-  constructor( target ) {
+  constructor( element ) {
+    let target = Dom.getElement(element);
+
+    if(target === false) {
+      console.error('[Hake Error] The hake-form can\'t find a element to bind.');
+    }
+
     if( target.tagName.toUpperCase() === 'FORM' ) {
       this.form = target;
 
@@ -18,6 +25,10 @@ class HakeForm {
 
   get data(){
     return Data.normalize(this.form);
+  }
+
+  set data(e){
+    return console.warn('[Hake Warn] You can\'t set the value through hake-form.');
   }
 
   get serial(){
